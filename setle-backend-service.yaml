@@ -1,0 +1,219 @@
+openapi: 3.1.0
+x-stoplight:
+  id: q9uodwevzp88o
+info:
+  title: User API Docs
+  description: User REST API documentation
+  version: v1
+servers:
+  - url: 'https://api.setle.app'
+paths:
+  /v1/employees/me:
+    get:
+      tags:
+        - employee-user-controller
+      summary: Get employee
+      description: Get employee
+      operationId: getEmployee
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserEmployeeResource'
+      security:
+        - oAuth2ClientCredentials: []
+      x-stoplight:
+        id: rn5ckkhijny8h
+    delete:
+      tags:
+        - employee-user-controller
+      summary: Delete employee
+      description: Delete employee
+      operationId: deleteEmployee
+      responses:
+        '204':
+          description: No Content
+      security:
+        - oAuth2ClientCredentials: []
+      x-stoplight:
+        id: glr9ons6mqwh3
+    patch:
+      tags:
+        - employee-user-controller
+      summary: Patch employee
+      description: Patch employee
+      operationId: patchEmployee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserPatchEmployeeRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserEmployeeResource'
+      security:
+        - oAuth2ClientCredentials: []
+      x-stoplight:
+        id: q3hoif6ykx14s
+  /v1/customers/me:
+    get:
+      tags:
+        - customer-user-controller
+      summary: Get customer
+      description: Get customer
+      operationId: getCustomer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCustomerResource'
+      security:
+        - oAuth2ClientCredentials: []
+      x-stoplight:
+        id: dvbjmjr8cxt4x
+    delete:
+      tags:
+        - customer-user-controller
+      summary: Delete customer
+      description: Delete customer
+      operationId: deleteCustomer
+      responses:
+        '204':
+          description: No Content
+      security:
+        - oAuth2ClientCredentials: []
+      x-stoplight:
+        id: klpqs58bkdz7v
+    patch:
+      tags:
+        - customer-user-controller
+      summary: Patch customer
+      description: Patch customer
+      operationId: patchCustomer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserPatchCustomerRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCustomerResource'
+      security:
+        - oAuth2ClientCredentials: []
+      x-stoplight:
+        id: ofaxbvq5zkqvo
+components:
+  schemas:
+    UserPatchEmployeeRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+          maxLength: 255
+          minLength: 1
+        lastName:
+          type: string
+          maxLength: 255
+          minLength: 1
+        phoneNumber:
+          type: string
+          maxLength: 20
+          minLength: 1
+        emailAddress:
+          type: string
+          maxLength: 255
+          minLength: 1
+      x-stoplight:
+        id: cjvh0271o2vto
+    UserEmployeeResource:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        phoneNumber:
+          type: string
+        emailAddress:
+          type: string
+        locale:
+          type: string
+        createdDateTime:
+          type: string
+          format: date-time
+        updatedDateTime:
+          type: string
+          format: date-time
+      required:
+        - createdDateTime
+      x-stoplight:
+        id: iz8v69ifhht31
+    UserPatchCustomerRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+          maxLength: 255
+          minLength: 1
+        lastName:
+          type: string
+          maxLength: 255
+          minLength: 1
+        phoneNumber:
+          type: string
+          maxLength: 20
+          minLength: 1
+        birthDate:
+          type: string
+        emailAddress:
+          type: string
+          maxLength: 255
+          minLength: 1
+      x-stoplight:
+        id: xdhpu74ocfidc
+    UserCustomerResource:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        phoneNumber:
+          type: string
+        birthDate:
+          type: string
+          format: date
+        emailAddress:
+          type: string
+        locale:
+          type: string
+        createdDateTime:
+          type: string
+          format: date-time
+        updatedDateTime:
+          type: string
+          format: date-time
+      required:
+        - createdDateTime
+      x-stoplight:
+        id: j95kuefpsj9xy
+  securitySchemes:
+    oAuth2ClientCredentials:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: 'https://api.setle.app/auth/v1/token/'
